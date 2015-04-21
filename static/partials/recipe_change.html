@@ -1,0 +1,90 @@
+
+<ol class="breadcrumb">
+    <li><a href='#/recipes'>Recipe List</a></li>
+    <li class='active'>Detail View</li>
+</ol>
+
+<h1>{{recipe.book_name}}  <small>Version {{recipe.version}}: {{recipe.name}}</small></h1>
+<h3>
+    Recipe Name: <input type='text' ng-model='recipe.name' /> 
+    <small>
+        Type of Recipe:
+        <select ng-model="catSel" ng-options="cat for cat in recipe.categories">
+        </select>
+        Source of Recipe:
+        <select ng-model="srcSel" ng-options="src for src in recipe.sources">
+        </select>
+    </small>
+</h3>
+
+<div ng-if="recipe_exists">
+    <a href='#/recipes/{{recipe_exists}}'>Return To Recipe Listing</a>
+</div>
+
+<table class='table table-striped table-condensed'>
+    <thead>
+    <th colspan='3'><h4>Component : <input type='text' class='new_input' ng-model='working.component_name' /></h4></th><th><button class='btn btn-primary btn-sm' ng-click='addComp()'><span class="glyphicon glyphicon-plus"></span> component</button></th>
+    
+    </thead>
+    <tbody ng-repeat='comp in recipe.comp' ng-init="outerIndex = $index">
+    <tr>
+        <th colspan='3'><h4>Component : <input ng-model="comp.name" type='text' /></h4></th><th><button class='btn btn-warning btn-sm' ng-click='removeComp(comp.id)'><span class="glyphicon glyphicon-remove"></span> component</button></th>
+    </tr>
+    <tr>
+        <th>Ingredients</th><th>Quantity</th><th>Unit</th><th></th>
+    </tr>
+    <tr ng-repeat="ing in comp.ingred" >
+        <td><input type='text' ng-model='ing.name' /></td>
+        <td><input type='text' ng-model='ing.qty' /></td>
+        <td><input type='text' ng-model='ing.units' /></td>
+        <td><button class='btn btn-warning btn-sm' ng-click='removeIngred(ing.id,comp.id)'><span class="glyphicon glyphicon-remove"></span> ingredient</button></td>
+    </tr>
+    <tr>
+        <td><input class='new_input' type='text' ng-model='working.ingred[outerIndex].name' /></td>
+        <td><input class='new_input' type='text' ng-model='working.ingred[outerIndex].qty' /></td>
+        <td><input class='new_input' type='text' ng-model='working.ingred[outerIndex].units' /></td>
+        <td><button class='btn btn-primary btn-sm' ng-click='addIngred(comp.id)'><span class="glyphicon glyphicon-plus"></span> ingredient</button></td>
+    </tr>
+    </tbody>
+</table> <!-- .table.table-striped.table-condensed -->
+<h4>Recipe Directions</h4>
+<div class='container'>
+    <div class='row' ng-repeat="direct in recipe.direct.text">
+        <div class='col-md-8'>
+            <textarea ng-model='direct.line' class='input_text' ></textarea>
+        </div> <!-- .col-md-8 -->
+        <div class='col-md-1'>
+            <button class='btn btn-warning btn-sm' ng-click='removeDirect(direct.id)'><span class="glyphicon glyphicon-remove"></span> direction</button>
+        </div> <!-- .col-md-1 -->
+    </div> <!-- .row -->
+
+    <div class='row'>
+        <div class='col-md-8'>
+            <input type='text' class='input_text new_input' ng-model='working.direct' />
+        </div> <!-- .col-md-8 -->
+        <div class='col-md-1'>
+            <button class='btn btn-primary btn-sm' ng-click='addDirect()'><span class="glyphicon glyphicon-plus"></span> line of directions</button>
+        </div> <!-- .col-md-1 -->
+    </div> <!-- .row -->
+
+    <div class='row'>
+        <div class='col-md-4'>
+            <div class='btn-group'>
+                <button class='btn btn-primary btn-sm' ng-click='saveRecipe()' >Save Recipe into Book</button>
+            </div> <!-- .btn-group -->
+        </div> <!-- .col-md-4 -->
+
+    </div> <!-- .row -->
+</div> <!-- .container -->
+<!--
+<ul>
+    <table class='table table-condensed'>
+    <tr ng-repeat="direct in recipe.direct.text">
+        <td colspan='7'><textarea class='direct_ta' ng-model='recipe.direct.text[$index].line' ></textarea></td><td><button class='btn btn-warning' ng-click='removeDirect(direct.id)'><span class="glyphicon glyphicon-remove"></span> direction</button></td>
+    </tr>
+    </table>
+    <input type='text' class='input_text new_input' ng-model='working.direct' />
+    <button class='btn btn-primary' ng-click='addDirect()'><span class="glyphicon glyphicon-plus"></span> line of directions</button>
+</ul>
+
+<button class='btn btn-primary pull-right' ng-click='saveRecipe()' >Save Recipe</button> -->

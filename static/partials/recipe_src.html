@@ -1,0 +1,25 @@
+<ol class="breadcrumb">
+    <li><a href='#/recipes'>Recipe List</a></li>
+    <li class='active'>Recipe Sources</li>
+</ol>
+
+<h1>{{book.book_name}}  <small>Version {{book.version}}</small></h1>
+<h2>Sources</h2>
+<div class='container'>
+
+    <div class='row'>
+        <div class='col-md-2'>
+            <input type='text' ng-model='new_src' class='new_input' />
+        </div>
+        <div class='col-md-1'>
+            <button class='btn btn-primary btn-sm' ng-click='addSrc()'>Add to list</button>
+        </div>
+    </div>
+
+    <div class='row' ng-repeat='src in book.sources'>
+        <div class='col-md-2'>
+            <input ng-model='src' type='text' />
+        </div>
+    </div>
+
+</div>

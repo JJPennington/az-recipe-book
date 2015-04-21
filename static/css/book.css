@@ -1,0 +1,19 @@
+body {
+    background-image:url('/img/dot_tile.png');
+}
+
+#mainbody {
+    background:#fcfcfc;
+    margin-top:10px;
+    margin-bottom:20px;
+    padding:20px;
+    box-shadow:10px 10px 5px #191919;
+}
+
+.input_text{
+    width:100%;
+}
+
+input[type='text'].new_input {
+    border: 2px solid #e9aaff;
+}

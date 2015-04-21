@@ -1,0 +1,36 @@
+
+<ol class="breadcrumb">
+    <li><a href='#/recipes'>Recipe List</a></li>
+    <li class='active'>Detail View</li>
+</ol>
+
+<h1>{{recipe.book_name}}  <small>Version {{recipe.version}}</small></h1>
+<p>
+    
+    <h3>{{recipe.name}}  
+        <small>{{recipe.categories[recipe.type]}}, {{recipe.sources[recipe.source]}}</small>
+    </h3>
+    <h5>Created : {{date.created}}, Modified : {{date.modified}}</h5> 
+    <a ng-href='#/recipes/edit/{{recipe.uid}}'><button class='btn btn-primary btn-sm'>Edit Recipe</button></a>
+    <button class='btn btn-primary btn-sm' ng-click='printRecipe(recipe.uid)'>Print Recipe</button>
+</p>
+
+<table class='table table-striped table-condensed'>
+    <tbody ng-repeat='comp in recipe.comp'>
+    <tr>
+        <th colspan='3'><h4>Component : {{comp.name}}</h4></th>
+    </tr>
+    <tr>
+        <th>Ingredients</th><th>Quantity</th><th>Unit</th>
+    </tr>
+    <tr ng-repeat="ing in comp.ingred">
+        <td>{{ing.name}}</td><td>{{ing.qty}}</td><td>{{ing.units}}</td>
+    </tr>
+    </tbody>
+</table> <!-- .table.table-striped.table-condensed -->
+<h4>Recipe Directions</h4>
+<ul>
+    <li ng-repeat="direct in recipe.direct.text">
+        {{direct}}
+    </li>
+</ul>

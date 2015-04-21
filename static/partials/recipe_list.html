@@ -1,0 +1,33 @@
+<ol class="breadcrumb">
+    <li class='active'><a href="#">Recipe List</a></li>
+</ol>
+
+<h1>{{data.name}}  <small>Version {{data.version}}</small></h1>
+<p>
+    <div class='btn-group'>
+        Filter: <input ng-model="reduce" /> Sort by:
+        <select ng-model="orderDisp">
+            <option value="name">Alphabetical</option>
+            <option value="type">Type</option>  
+            <option value="source">Source</option>
+            <option value="creation">Creation Date</option>
+        </select>
+
+        <a href='#/recipes/add'><button class='btn btn-primary btn-sm'>Add Recipe</button></a>
+        <a href='#/recipes/cat'><button class='btn btn-primary btn-sm'>Add Category</button></a>
+        <a href='#/recipes/src'><button class='btn btn-primary btn-sm'>Add Source</button></a>
+    </div> <!-- .btn-group -->
+</p>
+<table class='table table-striped'>
+<thead></thead>
+<tbody>
+    <tr><th>Recipe Name</th><th>Recipe Type</th><th>Source</th></tr>
+    <tr ng-repeat="recipe in data.recipes | orderBy:orderDisp | filter:reduce">
+        <td><a ng-href='#/recipes/{{recipe.uid}}'>{{recipe.name}}</a></td>
+        <td>{{data.categories[recipe.type]}}</td>
+        <td>{{data.sources[recipe.source]}}</td>
+    </tr>
+    </tbody>
+</table> <!-- .table.table-striped -->
+<p>Number of loaded recipes: <span>{{recipe_count}}</span></p>
+
